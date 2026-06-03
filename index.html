@@ -1277,7 +1277,10 @@ document.getElementById('googleSignInBtn').addEventListener('click', async () =>
   try {
     await signInWithPopup(auth, new GoogleAuthProvider());
     window.closeAuth(); showToast('Welcome! 👋');
-  } catch(e) { showToast('Sign in failed. Try again.'); }
+  } catch(e) { 
+    console.error("Google Auth Error:", e); // <-- This will show the exact cause
+    showToast('Sign in failed. Try again.'); 
+  }
 });
 document.getElementById('authMenuBtn').addEventListener('click', () => {
   if (currentUser) { signOut(auth); showToast('Signed out'); } else window.openAuth();
