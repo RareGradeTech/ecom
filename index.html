@@ -1321,6 +1321,11 @@ window.startCheckout = function() {
   openCheckoutModal();
 };
 
+  window.goToCheckoutStep = function(step) {
+  checkoutStep = step;
+  renderCheckoutStep();
+};
+
 function openCheckoutModal() {
   const o = document.getElementById('checkoutModal');
   o.style.display = 'flex';
@@ -1458,11 +1463,11 @@ function renderReviewStep() {
       <div style="display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:10px;"><span style="color:var(--text2)">Shipping</span><span>${shipping===0?'Free':'R'+formatPrice(shipping)}</span></div>
       <div style="display:flex;justify-content:space-between;font-weight:700;font-family:var(--font-display);font-size:1.05rem;padding-top:10px;border-top:1px solid var(--border);"><span>Total</span><span style="color:var(--accent)">R${formatPrice(total)}</span></div>
     </div>
-    <button class="action-btn" style="margin-top:16px;" onclick="checkoutStep=3;renderCheckoutStep()">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-      Proceed to Payment
-    </button>
-    <button class="action-btn secondary" style="margin-top:8px;" onclick="checkoutStep=1;renderCheckoutStep()">Back</button>
+<button class="action-btn" style="margin-top:16px;" onclick="window.goToCheckoutStep(3)">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+  Proceed to Payment
+</button>
+<button class="action-btn secondary" style="margin-top:8px;" onclick="window.goToCheckoutStep(1)">Back</button>
   </div>`;
 }
 
@@ -1491,7 +1496,7 @@ function renderPaymentStep() {
       ${!yocoPublicKey ? 'Payment Unavailable' : `Pay R${formatPrice(total)}`}
     </button>
     ${!yocoPublicKey ? '<p style="font-size:.75rem;color:var(--text3);text-align:center;margin-top:8px;">Yoco key not configured in Remote Config</p>' : ''}
-    <button class="action-btn secondary" style="margin-top:8px;" onclick="checkoutStep=2;renderCheckoutStep()">Back</button>
+    <button class="action-btn secondary" style="margin-top:8px;" onclick="window.goToCheckoutStep(2)">Back</button>
   </div>`;
 }
 
